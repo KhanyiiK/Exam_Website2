@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Description of your website" />
+    <meta name="keywords" content="static data, asteroids, visualization" />
+    <meta name="author" content="Your Name" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="STATIC DATA" />
+    <meta property="og:description" content="Description of your website for social media" />
+    <meta property="og:image" content="URL to an image for social media sharing" />
+    <meta property="og:url" content="URL of your website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@YourTwitterHandle" />
+
+    <link rel="stylesheet" href="api.css" />
+    <script src="https://kit.fontawesome.com/85c4a0174a.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <title>STATIC DATA</title>
+</head>
+
+<body>
+
+    <!-- header -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="navbar-brand">STATIC DATA</a>
+                <div class="navbar-nav">
+                    <ul>
+                        <li><a href="index.html">Homepage</a></li>
+                        <li><a href="interactiveData.html">Interactive Data</a></li>
+                        <li><a href="dataArt.html">Data Art1</a></li>
+                        <li><a href="art2.html">Data Art2</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="banner">
+            <div class="container">
+                <h1 class="banner-title">
+                    <span>STATIC</span>DATA
+                </h1>
+                <p><b>This section showcases the static data visualizations associated with my API.</b></p>
+            </div>
+        </div>
+    </header>
+    <!-- end of header -->
+
+    <!-- ... (Previous HTML content) ... -->
+
+<section class="charts-container">
+    <div class="chart">
+        <input type="date" id="dateInput" name="dateInput" value="2023-09-01" />
+        <button id="loadData">Load Static Asteroids Data</button>
+        <div id="output"></div>
+        <h3>Comparing Asteroid Velocities with Names in a Bar Chart</h3>
+<p>
+    The bar chart provides a visual representation of asteroid velocities in kilometers per second, accompanied by their 
+    corresponding names. The x-axis extends from 0 to the total count of asteroids for the selected date. Each asteroid's 
+    name is positioned along the y-axis, while the length of the bar above it represents its velocity. This chart serves as a 
+    straightforward means for users to compare the velocities of different asteroids on the selected date, offering a clear
+     and concise overview of the data.
+</p>
+        <div id="velocityChart"></div>
+        <div class="chart-info" id="velocityChartInfo"></div>
+    </div>
+
+    <div class="chart">
+        <h3>Comparing Asteroid Miss Distances with Names in a Scatter Plot</h3>
+        <p>
+            The scatter plot offers a visual comparison of asteroid miss distances from Earth in kilometers, associating each 
+            point with the respective asteroid name. The x-axis spans from 0 to the total count of asteroids for the selected date. 
+            Each asteroid's name is aligned on the y-axis, and the vertical position of the data point corresponds to its 
+            miss distance. This chart simplifies the task of comparing the miss distances of various asteroids on the chosen 
+            date, providing users with an intuitive and informative representation of the data.
+        </p>
+        <div id="missDistanceChart"></div>
+        <div class="chart-info" id="missDistanceChartInfo"></div>
+    </div>
+
+</section>
+ <script src="staticData.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+</body>
+
+</html>

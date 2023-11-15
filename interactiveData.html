@@ -1,0 +1,60 @@
+<DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="api.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <title>INTERACTIVE DATA</title>
+      </head>
+      <body>
+    
+        <!-- header -->
+        <header>
+          <nav class = "navbar">
+            <div class = "container">
+              <a href = "index.html" class = "navbar-brand">INTERACTIVE DATA
+              <div class = "navbar-nav">
+                <ul>
+                  <li><a href="index.html">Homepage</a></li>
+                  <li><a href="staticData.html">Static Data</a></li>
+                  <li><a href="dataArt.html">Data Art1</a></li>
+                  <li><a href="art2.html">Data Art2</a></li>
+                  
+              </ul>
+              </div>
+            </div>
+          </nav>
+          <div class = "banner">
+            <div class = "container">
+              <h1 class = "banner-title">
+                <span>INTERACTIVE</span>DATA
+              </h1>
+              <p><b>This section showcases the Interactive data visualizations associated with my API.</b></p>
+            </div>
+          </div>
+        </header>
+        <!-- end of header -->
+
+        <div class="chart">
+          <input type="date" id="dateInput" name="dateInput" value="2023-09-01" />
+          <button id="loadData">Load Static Asteroids Data</button>
+          <div id="output"></div>
+          <h3>Exploring Asteroid Characteristics with a Bubble Chart</h3>
+          <p>
+              The JavaScript code fetches data from NASA's NEO API, focusing on asteroid characteristics such as velocity, 
+              miss distance, and names. Upon selecting a date, the application retrieves the relevant data, processes it, 
+              and displays a bubble chart. The chart utilizes the D3.js library to visualize asteroid data in a comprehensive 
+              manner.<b>HOVER OVER BUBBLES TO SEE SPECIFIC DATA</b>
+            </p>
+            <div id="bubbleChart"></div>
+            <div class="chart-info" id="bubbleChartInfo">
+            </div>
+          </div>
+        </section>
+
+              <script src="interactiveData.js"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>

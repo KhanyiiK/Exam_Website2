@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="api.css"/>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>DATA ART</title>
+</head>
+<body>
+
+<!-- header -->
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">DATA ART2
+                <div class="navbar-nav">
+                    <ul>
+                        <li><a href="index.html">Homepage</a></li>
+                        <li><a href="staticData.html">Static Data</a></li>
+                        <li><a href="interactiveData.html">Interactive Data</a></li>
+                        <li><a href="dataArt.html">Data Art1</a></li>
+                    </ul>
+                </div>
+            </div>
+    </nav>
+    <div class="banner">
+        <div class="container">
+            <h1 class="banner-title">
+                <span>DATA</span>ART2
+            </h1>
+            <p><b>This section showcases the Data Art associated with my API.</b></p>
+        </div>
+    </div>
+</header>
+<!-- end of header -->
+
+<section class="center-container">
+    <h3>Dynamic Visualization of Asteroid Orbits</h3>
+    <p>
+        This interactive data art dynamically displays the orbits of asteroids based on their miss distances from Earth. 
+        Each circle represents an asteroid, with its position and size determined by its miss distance. 
+        Hover over a circle to view detailed information about the asteroid, including its name, diameter, velocity, 
+        and miss distance.<b>DATA IS DISPLAYED IN THE BOTTOM LEFT CORNER</b>
+    </p>
+    <input type="date" id="dateInput"/>
+    <button id="loadData">Load Asteroids Art</button>
+    <div id="output"></div>
+    <svg id="orbit-map"></svg>
+    <div id="tooltip" class="tooltip" style="opacity: 0"></div>
+    
+</section>
+
+<script src="dataArt2.js"></script>
+</body>
+</html>
