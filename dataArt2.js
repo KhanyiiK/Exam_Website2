@@ -1,21 +1,8 @@
-// Function to generate a random color with a specified opacity
-function getRandomColor() {
-    const hue = Math.floor(Math.random() * 360); // Random hue between 0 and 360
-    const saturation = 70; // Constant saturation
-    const lightness = 60; // Constant lightness
-
-    const color = `hsla(${hue}, ${saturation}%, ${lightness}%, `;
-    const opacity = Math.random();  // Random opacity between 0 and 1
-
-    return `${color}${opacity})`;
-}
-
-// Set up the SVG and tooltip
 const width = 800;
 const height = 800;
 let orbits = null;
 
-const svg = d3.select("#orbit-map")
+const svg = d3.select("#Orbit-Map")
     .attr("width", width)
     .attr("height", height)
     .attr("viewBox", `0 0 ${width} ${height}`);
@@ -24,14 +11,12 @@ const tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-// Set up the button click event listener
 const loadDataButton = document.getElementById("loadData");
 loadDataButton.addEventListener("click", loadAsteroidsArt);
 
-// Function to load asteroid data
 function loadAsteroidsArt() {
     const dateInput = document.getElementById('dateInput').value;
-    const apiKey = "GoeMBuuZBNwxjErw8AJfbweuUpRIxqesP2PevTZu";
+    const apiKey = "hmLb4VuZeYXJDH5eRHWTSjEjEWY57DYdYxzztVko";
     const apiUrl = `https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=${apiKey}&date=${dateInput}`;
 
     fetch(apiUrl)
@@ -48,50 +33,87 @@ function loadAsteroidsArt() {
             }
             renderAsteroidOrbits(asteroids);
         })
-        .catch(error => console.error("Error fetching data:", error.message));
+        .catch(error => console.error("Error getting data:", error.message));
 }
 
-// Function to render asteroid orbits
-// Function to render asteroid orbits
 function renderAsteroidOrbits(asteroids) {
     asteroids.sort((a, b) => {
         return a.close_approach_data[0].miss_distance.kilometers - b.close_approach_data[0].miss_distance.kilometers;
     });
 
-    const starRadius = Math.min(width, height) / 4; // Radius of the star pattern
+    const scale = d3.scaleLinear()
+        .domain([0, d3.max(asteroids, d => d.close_approach_data[0].miss_distance.kilometers)])
+        .range([10, width / 2]);
 
     const asteroidOrbits = orbits.selectAll("circle")
         .data(asteroids)
         .enter()
         .append("circle")
-        .attr("cx", (d, i) => width / 2 + starRadius * Math.cos((i / asteroids.length) * 2 * Math.PI))
-        .attr("cy", (d, i) => height / 2 + starRadius * Math.sin((i / asteroids.length) * 2 * Math.PI))
-        .attr("r", (d, i) => starRadius * (i / asteroids.length))
-        .attr("fill", getRandomColor)  // Use the updated function here
-        .attr("stroke", "none")
+        .attr("cx", width / 2)
+        .attr("cy", height / 2)
+        .attr("r", d => scale(d.close_approach_data[0].miss_distance.kilometers))
+        .attr("fill", "none")
+        .attr("stroke", createGradient)
         .attr("stroke-opacity", 0.6)
-        .attr("stroke-width", 2)
+        .attr("stroke-width", 6)
         .on("mouseover", function (event, d) {
-            const circle = d3.select(this);
-
             tooltip.transition()
                 .duration(200)
                 .style("opacity", 0.9);
             tooltip.html(
-                `<strong>Name:</strong> ${d.name}<br>` +
-                `<strong>Diameter:</strong> ${d.estimated_diameter.kilometers.estimated_diameter_max} kilometers<br>` +
-                `<strong>Velocity:</strong> ${d.close_approach_data[0].relative_velocity.kilometers_per_second} km/s<br>` +
-                `<strong>Miss Distance:</strong> ${d.close_approach_data[0].miss_distance.kilometers} kilometers`
+                "Name: " + d.name + "<br>" +
+                "Diameter: " + d.estimated_diameter.kilometers.estimated_diameter_max + " kilometers<br>" +
+                "Velocity: " + d.close_approach_data[0].relative_velocity.kilometers_per_second + " km/s<br>" +
+                "Miss Distance: " + d.close_approach_data[0].miss_distance.kilometers + " kilometers"
             )
-            .style("left", (parseFloat(circle.attr("cx")) + 5) + "px")
-            .style("top", (parseFloat(circle.attr("cy")) - 28) + "px");
-
-            // Display the random color in the tooltip
-            tooltip.style("background", getRandomColor());
+            .style("left", (event.pageX + 5) + "px")
+            .style("top", (event.pageY - 28) + "px");
         })
         .on("mouseout", () => {
             tooltip.transition()
                 .duration(500)
                 .style("opacity", 0);
         });
+
+    // Create a radial gradient with a spectrum of colors
+    function createGradient(d, i) {
+        const gradientId = `gradient-${i}`;
+        const gradient = orbits.append("radialGradient")
+            .attr("id", gradientId)
+            .attr("cx", "50%")
+            .attr("cy", "50%")
+            .attr("r", "50%")
+            .attr("fx", "50%")
+            .attr("fy", "50%");
+
+        gradient.append("stop")
+            .attr("offset", "0%")
+            .style("stop-color", "red");
+
+        gradient.append("stop")
+            .attr("offset", "16.66%")
+            .style("stop-color", "orange");
+
+        gradient.append("stop")
+            .attr("offset", "33.33%")
+            .style("stop-color", "yellow");
+
+        gradient.append("stop")
+            .attr("offset", "50%")
+            .style("stop-color", "green");
+
+        gradient.append("stop")
+            .attr("offset", "66.66%")
+            .style("stop-color", "blue");
+
+        gradient.append("stop")
+            .attr("offset", "83.33%")
+            .style("stop-color", "indigo");
+
+        gradient.append("stop")
+            .attr("offset", "100%")
+            .style("stop-color", "violet");
+
+        return `url(#${gradientId})`;
+    }
 }
